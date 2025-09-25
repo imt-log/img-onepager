@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>imt-onepager</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>imt-onepager · 티스토리 반자동 발행 링크 모음</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="imt-log Release에서 HTML/PDF/DOCX/이미지 링크를 자동 수집해 한 페이지에 보여줍니다." />
 </head>
 <body>
-  <header>
+  <header class="hero">
     <h1>imt-onepager</h1>
-    <p>GitHub Pages 기반 원페이지 블로그/툴</p>
+    <p>imt-log 발행 패키지를 자동으로 모아 보여주는 원페이지</p>
+    <div class="hero-actions">
+      <a class="btn" href="https://github.com/USER/imt-log" target="_blank" rel="noreferrer">imt-log 리포 보기</a>
+      <a class="btn outline" href="https://imt-log.tistory.com" target="_blank" rel="noreferrer">티스토리 바로가기</a>
+    </div>
   </header>
 
-  <main>
-    <section id="intro">
+  <main class="container">
+    <!-- 소개 -->
+    <section>
       <h2>소개</h2>
-      <p>이 페이지는 GitHub Actions와 Pages를 활용해 자동 배포되는 원페이지 예제입니다.</p>
+      <p>아래 목록은 <code>imt-log</code> 리포의 <b>Releases</b>에서 자동 수집됩니다. 각 항목은 한 번의 <code>git push</code>로 생성된
+      <b>HTML</b> 본문, <b>PDF</b>, <b>DOCX</b>, <b>WebP 이미지</b> 링크를 모아 보여줍니다.</p>
     </section>
 
-    <section id="features">
-      <h2>주요 기능</h2>
-      <ul>
-        <li>Markdown 기반 글 자동 변환</li>
-        <li>단순 정적 HTML 호스팅</li>
-        <li>CI/CD 자동화</li>
-      </ul>
+    <!-- 컨트롤 -->
+    <section class="controls">
+      <div class="row">
+        <input id="search" type="search" placeholder="제목/파일명으로 검색…" />
+        <select id="assetFilter">
+          <option value="">모든 형식</option>
+          <option value=".html">HTML</option>
+          <option value=".pdf">PDF</option>
+          <option value=".docx">DOCX</option>
+          <option value=".webp">이미지(WebP)</option>
+        </select>
+        <select id="limit">
+          <option value="10">최근 10개</option>
+          <option value="20" selected>최근 20개</option>
+          <option value="50">최근 50개</option>
+        </select>
+        <button id="reload" class="btn">새로고침</button>
+      </div>
+      <div class="hint" id="rateHint" hidden>많이 조회하면 GitHub API 제한(비로그인 60/h)에 걸릴 수 있어요.</div>
+    </section>
+
+    <!-- 목록 -->
+    <section>
+      <h2>발행 패키지</h2>
+      <div id="releaseList" class="grid"></div>
+      <div id="empty" class="empty" hidden>검색 조건에 맞는 항목이 없습니다.</div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 imt-onepager</p>
+  <footer class="footer">
+    <p>© 2025 imt-onepager · GitHub Pages 자동 배포</p>
   </footer>
 
   <script src="js/main.js"></script>
