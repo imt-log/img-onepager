@@ -1,5 +1,5 @@
 // 🔧 설정값: 소유자/리포/브랜치
-const GITHUB_OWNER = "USER";        // ← 깃허브 사용자/조직 이름
+const GITHUB_OWNER = "imt-log";        // ← 깃허브 사용자/조직 이름
 const LOG_REPO     = "imt-log";     // ← 발행 산출물 리포
 const PAGES_LIMIT  = 50;            // 최대 페이지만큼 가져오지 않고, UI에서 limit로 절단
 const PER_PAGE     = 30;            // GitHub API 한 페이지 리스팅 수
@@ -170,7 +170,7 @@ async function bootstrap() {
 // ⚠️ 리포 소유자명 바꾸기
 document.addEventListener("DOMContentLoaded", () => {
   // 헤더 버튼 링크의 USER 자리도 교체
-  document.querySelectorAll('a[href*="github.com/USER/imt-log"]').forEach(a => {
+  document.querySelectorAll('a[href*="github.com/imt-log/imt-onpager"]').forEach(a => {
     a.href = a.href.replace("USER", GITHUB_OWNER);
   });
   bootstrap();
